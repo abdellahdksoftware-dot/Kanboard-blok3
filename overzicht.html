@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Overzicht – SparenVoorIedereen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Overzicht</h1>
+
+        <!-- Berichten (gelukt of fout) -->
+        {% with berichten = get_flashed_messages(with_categories=true) %}
+            {% for categorie, bericht in berichten %}
+                <p class="bericht {{ categorie }}">{{ bericht }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <!-- Saldo -->
+        <section class="saldo">
+            <span>Huidig saldo</span>
+            <strong>€ {{ "%.2f"|format(saldo) }}</strong>
+        </section>
+
+        <!-- Formulier om te storten of op te nemen -->
+        <section>
+            <h2>Nieuwe transactie</h2>
+            <form method="post" action="{{ url_for('transactie', rekening_id=rekening_id) }}">
+                <select name="type">
+                    <option value="storting">Storten</option>
+                    <option value="opname">Opnemen</option>
+                </select>
+                <input type="text" name="bedrag" placeholder="Bedrag, bijv. 25,50" required>
+                <button type="submit">Verwerk</button>
+            </form>
+        </section>
+
+        <!-- Lijst met transacties -->
+        <section>
+            <h2>Transacties</h2>
+            {% if transacties %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Type</th>
+                            <th>Bedrag</th>
+                            <th>Saldo erna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in transacties %}
+                        <tr>
+                            <td>{{ t["datum"] }}</td>
+                            <td>{{ t["type"] }}</td>
+                            <td class="{{ t['type'] }}">
+                                {% if t["type"] == "opname" %}−{% else %}+{% endif %}€ {{ "%.2f"|format(t["bedrag"]) }}
+                            </td>
+                            <td>€ {{ "%.2f"|format(t["saldo_na_transactie"]) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Er zijn nog geen transacties.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
