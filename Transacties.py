@@ -1,9 +1,3 @@
-"""Transacties berekenen: storten en opnemen, het nieuwe saldo uitrekenen en opslaan.
-
-Dit bestand kent geen Flask of HTML. Het werkt alleen met Python en de database,
-dus je kunt het ook los testen.
-"""
-
 from datetime import datetime
 
 from database import maak_verbinding

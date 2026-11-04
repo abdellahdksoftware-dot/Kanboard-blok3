@@ -69,3 +69,75 @@
     </main>
 </body>
 </html>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    color: #222;
+}
+
+main {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+
+section {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.saldo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.saldo strong {
+    font-size: 1.6em;
+}
+
+form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+select, input, button {
+    padding: 8px 10px;
+    font-size: 1em;
+}
+
+button {
+    background: #0b6efd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.storting { color: #198754; }
+.opname { color: #c0392b; }
+
+.bericht {
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+.bericht.succes { background: #d1e7dd; }
+.bericht.fout { background: #f8d7da; }
